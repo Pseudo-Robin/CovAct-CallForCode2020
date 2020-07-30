@@ -1,0 +1,72 @@
+<style>
+    body {
+        background-image: url("https://images.pexels.com/photos/1166643/pexels-photo-1166643.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+</style>
+<script>
+    window.watsonAssistantChatOptions = {
+        integrationID: "9d940b80-803a-4498-a3e7-c9a600e2383e", // The ID of this integration.
+        region: "eu-gb", // The region your integration is hosted in.
+        serviceInstanceID: "636dfaeb-5570-406c-841d-f0dd15837611", // The ID of your service instance.
+        onLoad: function (instance) { instance.render(); }
+    };
+    setTimeout(function () {
+        const t = document.createElement('script');
+        t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+        document.head.appendChild(t);
+    });
+</script>
+
+
+
+<h4 style="text-align: center; color:black ;line-height: 64px; font-size: 40px; white-space: inherit;">
+    <b><u>Dashboard</u></b></h4>
+<h3 style="font-family:custom_191">Welcome {{name}}!</h3>
+
+<p style="font-family:custom_191">Here are your requests.</p>
+
+{{#if stories}}
+
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date/Time</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each stories}}
+        <tr>
+            <td><a href="/stories/{{_id}}">{{title}}</a></td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td>
+                <a href="/stories/edit/{{_id}}" class="btn btn-float">
+
+                    <i class="fas fa-edit"></i></a>
+
+                <form action="/stories/{{_id}}" method="POST" id="delete-form">
+
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{else}}
+<p style="text-align:center; color:red;font-weight:bolder">You have not created any requests, create one now by clicking
+    at the bottom right button!</p>
+
+{{/if}}
+
+<iframe src='https://deadsimplechat.com/WaQx0bcD6' width='100%' height='300px'></iframe>

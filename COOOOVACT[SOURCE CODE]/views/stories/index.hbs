@@ -1,0 +1,37 @@
+<style>
+    body {
+        background-image: url("https://images.unsplash.com/photo-1448745799564-e2c1ed534c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+</style>
+
+<h1>Requests</h1>
+
+<div class="row">
+    {{#each stories}}
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image">
+                {{{editIcon user ../user _id}}}
+            </div>
+            <div class="card-content center-align">
+                <h5>{{title}}</h5>
+                <p>{{stripTags (truncate body 150)}}</p>
+                <br>
+                <div class="chip">
+                    <img src="{{user.image}}" alt="">
+                    <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
+                </div>
+            </div>
+            <div class="card-action center-align">
+                <a href="/stories/{{_id}}" class="btn grey">Read more</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <p>No requests to display.</p>
+
+    {{/each}}
+</div>

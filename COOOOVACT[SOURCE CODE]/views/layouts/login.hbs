@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA=="
+    crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "9d940b80-803a-4498-a3e7-c9a600e2383e", // The ID of this integration.
+      region: "eu-gb", // The region your integration is hosted in.
+      serviceInstanceID: "636dfaeb-5570-406c-841d-f0dd15837611", // The ID of your service instance.
+      onLoad: function (instance) { instance.render(); }
+    };
+    setTimeout(function () {
+      const t = document.createElement('script');
+      t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+      document.head.appendChild(t);
+    });
+  </script>
+  <title>CovAct</title>
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul.topnav {
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    ul.topnav li {
+      display: inline-block;
+      width: auto;
+      margin: 0 auto;
+      float: none;
+    }
+
+    ul.topnav li a {
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    ul.topnav li a:hover:not(.active) {
+      background-color: powderblue;
+    }
+
+    ul.topnav li a.active {
+      background-color: powderblue
+    }
+
+    ul.topnav li.right {
+      float: right;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      ul.topnav li.right,
+      ul.topnav li {
+        float: none;
+      }
+    }
+
+
+    .align {
+      text: center;
+      align: center;
+      float: none;
+      width: 50%;
+      padding: 5px;
+    }
+
+    section {
+      background-image: url("https://images.pexels.com/photos/1040499/pexels-photo-1040499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .two-images {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+
+    .half-width {
+      width: 48%; // or 49%
+    }
+
+    .box {
+      margin: 0 auto;
+      width: 200px //you can set it in %.
+        padding:20px;
+
+      border: 2px solid #333;
+    }
+
+    body {
+      background-image: url("https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=282&q=80");
+      background-color: #cccccc;
+    }
+
+
+
+
+    .bgimg {
+      background-image: url('data:image/jpeg;base64,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');
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+
+    <ul class="topnav">
+
+      <li><a class="active" href="#home"><b>HOME</b></a></li>
+      <li><a class="active" href="#about"><b>ABOUT PROJECT</b></a></li>
+      <li><a class="active" href="#aboutus"><b>ABOUT US</b></a></li>
+      <li><a class="active" href="#bottom"><b>CONTACT US</b></a></li>
+
+    </ul>
+
+  </header>
+
+  <section id="home" class="rocky-dashed animate-pop-in">
+    <span class="border border-primary">
+      <div class="bgimg">
+        <center>
+          <div class="mx-auto"
+            background-image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNhFDBPA0ZfS_QA47KSVvXpSLsrGnrP3QbCw&usqp=CAU">
+            <div class="container login-container">
+              <div class="card">
+                <div class="card-content">
+                  {{{body}}}
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      </center>
+    </span>
+  </section>
+  </div>
+  <br>
+  <br> <br><br>
+
+  <section id="about">
+    <div>
+      <br>
+      <br>
+      <h2 style="color: white;" class="rocky-dashed animate-pop-in">
+        <center><strong><b>About Project</b></strong></center>
+      </h2>
+      <center>
+        <p style="color: white;background-color:black" class="rocky-dashed animate-pop-in">
+          <big><big>
+              CovAct is an effort to help survive and grow the small scale business
+              and those people who need a push during covid pandemic to reach out to their customer base.This project
+              has
+              a motive to serve and help people even from rural areas to promote their product whether its handmade or
+              produced using machines while spreading awareness about Covid19 at the same time. We aim to help everyone
+              who is affected by covid and need to reach out to people
+              so
+              that they can earn and survive. This project is not product specific and helps every sort of buisness.This
+              will
+              also
+              help common people to find what they want easily without actually going out and looking for it. This
+              dynamic
+              project helps customers to contact directly to the those shops or vendors without any third
+              medium.<em><b> We
+                  hope that it helps small business and people who make handmade things on a small scale grow and
+                  serve
+                  many customers.</b></em>
+            </big></big>
+
+        </p>
+      </center>
+      <br><br><br><br> <br>
+      <section id="aboutus">
+        <center>
+          <h2 style="color: white;" class="rocky-dashed animate-pop-in"><strong><b>About Us</b></strong></h2>
+          <p style="color:white; background-color:black" class="rocky-dashed animate-pop-in"> <big><big> We are a team
+                of passionate developers who aim to
+                help and bring change in
+                our society with the help of skills we have. We are currently pursuing our undergrad at Vellore
+                Institute of
+                Technology (2019-2023), and are curious to find solutions of the problems around us. During this time of
+                covid
+                pandemic, we want to help all those people who are not able to earn and survive as well as
+                tradesman/shopkeeper/businessman to connect, share and gain awareness. </big></big> </p>
+        </center>
+      </section>
+
+      <br>
+
+      <div class="two-images">
+        <figure class="half-width">
+          <img src="https://i.imgur.com/KYkWt05.jpg" width="200px" height="250px" />
+          <figcaption style="color: white;"><strong> <big>
+                ISHITA JOHRI <br>
+                ishita.johri2019@vitstudent.ac.in
+              </big> </strong></figcaption>
+
+        </figure>
+
+        <figure class="half-width">
+          <img src="https://i.imgur.com/ewrwFGl.jpg" width="200px" height="250px" />
+          <figcaption style="color: white;"><strong><big>ROBIN SINGH <br>
+                robin.singh2019@vitstudent.ac.in</big></strong></figcaption>
+
+        </figure>
+
+      </div>
+      <section id="bottom">
+        <div align="center" style="background-image: url("
+          https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); ">
+				<script src=" https://cdnjs.cloudflare.com/ajax/libs/punycode/1.4.1/punycode.min.js">
+        </script>
+          <script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
+          <script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.19287" type="text/javascript"></script>
+          <script type="text/javascript">
+            JotForm.init(function () {
+              if (window.JotForm && JotForm.accessible) $('input_8').setAttribute('tabindex', 0);
+              if (window.JotForm && JotForm.accessible) $('input_4').setAttribute('tabindex', 0);
+              JotForm.newDefaultTheme = false;
+              JotForm.newPaymentUIForNewCreatedForms = false;
+              JotForm.clearFieldOnHide = "disable";
+              /*INIT-END*/
+            });
+
+            JotForm.prepareCalculationsOnTheFly([null, null, { "name": "submit", "qid": "2", "text": "SUBMIT", "type": "control_button" }, null, { "name": "message4", "qid": "4", "text": "Message", "type": "control_textarea" }, null, null, { "name": "email", "qid": "7", "text": "E-mail", "type": "control_email" }, { "name": "fullName", "qid": "8", "text": "Full Name", "type": "control_textbox" }, { "name": "clickTo", "qid": "9", "text": "Contact Us", "type": "control_head" }]);
+            setTimeout(function () {
+              JotForm.paymentExtrasOnTheFly([null, null, { "name": "submit", "qid": "2", "text": "SUBMIT", "type": "control_button" }, null, { "name": "message4", "qid": "4", "text": "Message", "type": "control_textarea" }, null, null, { "name": "email", "qid": "7", "text": "E-mail", "type": "control_email" }, { "name": "fullName", "qid": "8", "text": "Full Name", "type": "control_textbox" }, { "name": "clickTo", "qid": "9", "text": "Contact Us", "type": "control_head" }]);
+            }, 20); 
+          </script>
+          <link href="https://cdn.jotfor.ms/static/formCss.css?3.3.19287" rel="stylesheet" type="text/css" />
+          <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/nova.css?3.3.19287" />
+          <link type="text/css" media="print" rel="stylesheet"
+            href="https://cdn.jotfor.ms/css/printForm.css?3.3.19287" />
+          <link type="text/css" rel="stylesheet"
+            href="https://cdn.jotfor.ms/css/styles/payment/payment_feature.css?3.3.19287" />
+          <style type="text/css" media="all">
+            .form-label-left {
+              width: 150px;
+            }
+
+            .form-line {
+              padding-top: 12px;
+              padding-bottom: 12px;
+            }
+
+            .form-label-right {
+              width: 150px;
+            }
+
+            .form-all {
+              width: 450px;
+              color: rgb(62, 62, 62) !important;
+              font-family: 'Lucida Grande&';
+              font-size: 14px;
+            }
+
+            .form-radio-item label,
+            .form-checkbox-item label,
+            .form-grading-label,
+            .form-header {
+              color: #2E2E2E;
+            }
+          </style>
+
+          <style type="text/css" id="form-designer-style">
+            /* Injected CSS Code */
+            @import "https://fonts.googleapis.com/css?family=Titillium+Web:light,lightitalic,normal,italic,bold,bolditalic|Exo+2:light,lightitalic,normal,italic,bold,bolditalic";
+
+            .form-all {
+              font-family: "Lucida Grande&", sans-serif;
+            }
+
+            .form-all {
+              width: 450px;
+            }
+
+            .form-label-left,
+            .form-label-right {
+              width: 150px;
+            }
+
+            .form-label {
+              white-space: normal;
+            }
+
+            .form-label.form-label-auto {
+              display: block;
+              float: none;
+              text-align: left;
+            }
+
+            .form-label-left {
+              display: inline-block;
+              white-space: normal;
+              float: left;
+              text-align: left;
+            }
+
+            .form-label-right {
+              display: inline-block;
+              white-space: normal;
+              float: left;
+              text-align: right;
+            }
+
+            .form-label-top {
+              white-space: normal;
+              display: block;
+              float: none;
+              text-align: left;
+            }
+
+            .form-radio-item label:before {
+              top: 0;
+            }
+
+            .form-all {
+              font-size: 14px;
+            }
+
+            .form-label {
+              font-weight: bold;
+            }
+
+            .form-checkbox-item label,
+            .form-radio-item label {
+              font-weight: normal;
+            }
+
+            .supernova {
+              background-color: #ffffff;
+              background-color: #e6e3e3;
+            }
+
+            .supernova body {
+              background-color: transparent;
+            }
+
+            /*
+@width30: (unit(@formWidth, px) + 60px);
+@width60: (unit(@formWidth, px)+ 120px);
+@width90: (unit(@formWidth, px)+ 180px);
+*/
+            /* | */
+            @media screen and (min-width: 480px) {
+              .supernova .form-all {
+                border: 1px solid #cec8c8;
+                -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+                -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+              }
+            }
+
+            /* | */
+            /* | */
+            @media screen and (max-width: 480px) {
+              .jotform-form {
+                padding: 10px 0;
+              }
+            }
+
+            /* | */
+            /* | */
+            @media screen and (min-width: 480px) and (max-width: 768px) {
+              .jotform-form {
+                padding: 30px 0;
+              }
+            }
+
+            /* | */
+            /* | */
+            @media screen and (min-width: 480px) and (max-width: 449px) {
+              .jotform-form {
+                padding: 30px 0;
+              }
+            }
+
+            /* | */
+            /* | */
+            @media screen and (min-width: 768px) {
+              .jotform-form {
+                padding: 60px 0;
+              }
+            }
+
+            /* | */
+            /* | */
+            @media screen and (max-width: 449px) {
+              .jotform-form {
+                padding: 12px;
+              }
+            }
+
+            /* | */
+            .supernova .form-all,
+            .form-all {
+              background-color: #ffffff;
+              border: 1px solid transparent;
+            }
+
+            .form-header-group {
+              border-color: #e6e6e6;
+            }
+
+            .form-matrix-table tr {
+              border-color: #e6e6e6;
+            }
+
+            .form-matrix-table tr:nth-child(2n) {
+              background-color: #f2f2f2;
+            }
+
+            .form-all {
+              color: #3e3e3e;
+            }
+
+            .form-header-group .form-header {
+              color: #3e3e3e;
+            }
+
+            .form-header-group .form-subHeader {
+              color: #585858;
+            }
+
+            .form-sub-label {
+              color: #585858;
+            }
+
+            .form-label-top,
+            .form-label-left,
+            .form-label-right,
+            .form-html {
+              color: #3e3e3e;
+            }
+
+            .form-checkbox-item label,
+            .form-radio-item label {
+              color: #585858;
+            }
+
+            .form-line.form-line-active {
+              -webkit-transition-property: all;
+              -moz-transition-property: all;
+              -ms-transition-property: all;
+              -o-transition-property: all;
+              transition-property: all;
+              -webkit-transition-duration: 0.3s;
+              -moz-transition-duration: 0.3s;
+              -ms-transition-duration: 0.3s;
+              -o-transition-duration: 0.3s;
+              transition-duration: 0.3s;
+              -webkit-transition-timing-function: ease;
+              -moz-transition-timing-function: ease;
+              -ms-transition-timing-function: ease;
+              -o-transition-timing-function: ease;
+              transition-timing-function: ease;
+              background-color: rgba(0, 0, 0, 0);
+            }
+
+            /* omer */
+            .form-radio-item,
+            .form-checkbox-item {
+              padding-bottom: 0px !important;
+            }
+
+            .form-radio-item:last-child,
+            .form-checkbox-item:last-child {
+              padding-bottom: 0;
+            }
+
+            /* omer */
+            .form-single-column .form-checkbox-item,
+            .form-single-column .form-radio-item {
+              width: 100%;
+            }
+
+            .supernova {
+              height: 100%;
+              background-repeat: no-repeat;
+              background-attachment: scroll;
+              background-position: center top;
+              background-repeat: repeat;
+            }
+
+            .supernova {
+              background-image: none;
+            }
+
+            #stage {
+              background-image: none;
+            }
+
+            /* | */
+            .form-all {
+              background-repeat: no-repeat;
+              background-attachment: scroll;
+              background-position: center top;
+              background-repeat: repeat;
+            }
+
+            .form-header-group {
+              background-repeat: no-repeat;
+              background-attachment: scroll;
+              background-position: center top;
+            }
+
+            .form-line {
+              margin-top: 0px;
+              margin-bottom: 0px;
+            }
+
+            .form-line {
+              padding: 6px 36px;
+            }
+
+            .form-all .qq-upload-button,
+            .form-all .form-submit-button,
+            .form-all .form-submit-reset,
+            .form-all .form-submit-print {
+              font-size: 1em;
+              padding: 9px 15px;
+              font-family: "Titillium Web", sans-serif;
+              font-size: 16px;
+              font-weight: bold;
+              border: none;
+              border-width: 1px !important;
+              border-style: solid !important;
+              border-color: #9e9e9e !important;
+            }
+
+            .form-all .qq-upload-button,
+            .form-all .form-submit-button,
+            .form-all .form-submit-reset,
+            .form-all .form-submit-print {
+              color: #ffffff !important;
+              background: #9e9e9e;
+              box-shadow: none;
+              text-shadow: none;
+            }
+
+            .form-all .form-pagebreak-back,
+            .form-all .form-pagebreak-next {
+              font-size: 1em;
+              padding: 9px 15px;
+              font-family: "Lucida Grande&", sans-serif;
+              font-size: 14px;
+              font-weight: normal;
+            }
+
+            .form-all .form-pagebreak-back,
+            .form-all .form-pagebreak-next {
+              color: #3e3e3e !important;
+              background: false;
+              box-shadow: none;
+              text-shadow: none;
+            }
+
+            /*
+& when ( @buttonFontType = google ) {
+	@import (css) "@{buttonFontLink}";
+}
+*/
+            h2.form-header {
+              line-height: 1.618em;
+              font-size: 1.714em;
+            }
+
+            h2~.form-subHeader {
+              line-height: 1.5em;
+              font-size: 1.071em;
+            }
+
+            .form-header-group {
+              text-align: left;
+            }
+
+            /*.form-dropdown,
+.form-radio-item,
+.form-checkbox-item,
+.form-radio-other-input,
+.form-checkbox-other-input,*/
+            .form-captcha input,
+            .form-spinner input,
+            .form-error-message {
+              padding: 4px 3px 2px 3px;
+            }
+
+            .form-header-group {
+              font-family: "Exo 2", sans-serif;
+            }
+
+            .form-section {
+              padding: 0px 0px 0px 0px;
+            }
+
+            .form-header-group {
+              margin: 0px 0px 0px 0px;
+            }
+
+            .form-header-group {
+              padding: 24px 36px 24px 36px;
+            }
+
+            .form-header-group .form-header,
+            .form-header-group .form-subHeader {
+              color: #3e3e3e;
+            }
+
+            .form-header-group {
+              background-color: #e4e4e4;
+            }
+
+            .form-textbox,
+            .form-textarea {
+              border-width: 1px;
+              border-style: solid;
+              border-color: #bdbdbd;
+              color: #3e3e3e;
+              padding: 4px 3px 2px 3px;
+            }
+
+            .form-textbox,
+            .form-textarea,
+            .form-radio-other-input,
+            .form-checkbox-other-input,
+            .form-captcha input,
+            .form-spinner input {
+              background-color: rgba(255, 255, 255, 0);
+            }
+
+            [data-type="control_dropdown"] .form-input,
+            [data-type="control_dropdown"] .form-input-wide {
+              width: 150px;
+            }
+
+            .form-buttons-wrapper {
+              margin-left: 0 !important;
+              text-align: center;
+            }
+
+            .form-header-group {
+              border-bottom: none;
+            }
+
+            .form-label {
+              font-family: "Lucida Grande&", sans-serif;
+            }
+
+            li[data-type="control_image"] div {
+              text-align: left;
+            }
+
+            li[data-type="control_image"] img {
+              border: none;
+              border-width: 0px !important;
+              border-style: solid !important;
+              border-color: false !important;
+            }
+
+            .form-line-column {
+              width: auto;
+            }
+
+            .form-line-error {
+              background-color: #ffffff;
+              -webkit-box-shadow: inset 0px 3px 11px -7px #ff3200;
+              -moz-box-shadow: inset 0px 3px 11px -7px #ff3200;
+              box-shadow: inset 0px 3px 11px -7px #ff3200;
+            }
+
+            .form-line-error input:not(#coupon-input),
+            .form-line-error textarea,
+            .form-line-error .form-validation-error {
+              -webkit-transition-property: none;
+              -moz-transition-property: none;
+              -ms-transition-property: none;
+              -o-transition-property: none;
+              transition-property: none;
+              -webkit-transition-duration: 0.3s;
+              -moz-transition-duration: 0.3s;
+              -ms-transition-duration: 0.3s;
+              -o-transition-duration: 0.3s;
+              transition-duration: 0.3s;
+              -webkit-transition-timing-function: ease;
+              -moz-transition-timing-function: ease;
+              -ms-transition-timing-function: ease;
+              -o-transition-timing-function: ease;
+              transition-timing-function: ease;
+              border: 1px solid inherit;
+              -moz-box-shadow: 0 0 3px inherit;
+              -webkit-box-shadow: 0 0 3px inherit;
+              box-shadow: 0 0 3px inherit;
+            }
+
+            .form-line-error .form-error-message {
+              margin: 0;
+              position: absolute;
+              color: #fff;
+              display: inline-block;
+              right: 0;
+              font-size: 10px;
+              position: absolute !important;
+              box-shadow: none;
+              top: 0px;
+              line-height: 20px;
+              color: #FFF;
+              background: #ff3200;
+              padding: 0px 5px;
+              bottom: auto;
+              min-width: 105px;
+              -webkit-border-radius: 0;
+              -moz-border-radius: 0;
+              border-radius: 0;
+            }
+
+            .form-line-error .form-error-message img,
+            .form-line-error .form-error-message .form-error-arrow {
+              display: none;
+            }
+
+            .ie-8 .form-all {
+              margin-top: auto;
+              margin-top: initial;
+            }
+
+            .ie-8 .form-all:before {
+              display: none;
+            }
+
+            /* | */
+            @media screen and (max-width: 480px),
+            screen and (max-device-width: 768px) and (orientation: portrait),
+            screen and (max-device-width: 415px) and (orientation: landscape) {
+              .testOne {
+                letter-spacing: 0;
+              }
+
+              .jotform-form {
+                padding: 12px 0 0 0;
+              }
+
+              .form-all {
+                border: 0;
+                width: 94% !important;
+                max-width: initial;
+              }
+
+              .form-sub-label-container {
+                width: 100%;
+                margin: 0;
+                margin-right: 0;
+                float: left;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+
+              span.form-sub-label-container+span.form-sub-label-container {
+                margin-right: 0;
+              }
+
+              .form-sub-label {
+                white-space: normal;
+              }
+
+              .form-address-table td,
+              .form-address-table th {
+                padding: 0 1px 10px;
+              }
+
+              .form-submit-button,
+              .form-submit-print,
+              .form-submit-reset {
+                width: 100%;
+                margin-left: 0 !important;
+              }
+
+              div[id*=at_] {
+                font-size: 14px;
+                font-weight: 700;
+                height: 8px;
+                margin-top: 6px;
+              }
+
+              .showAutoCalendar {
+                width: 20px;
+              }
+
+              img.form-image {
+                max-width: 100%;
+                height: auto;
+              }
+
+              .form-matrix-row-headers {
+                width: 100%;
+                word-break: break-all;
+                min-width: 40px;
+              }
+
+              .form-collapse-table,
+              .form-header-group {
+                margin: 0;
+              }
+
+              .form-collapse-table {
+                height: 100%;
+                display: inline-block;
+                width: 100%;
+              }
+
+              .form-collapse-hidden {
+                display: none !important;
+              }
+
+              .form-input {
+                width: 100%;
+              }
+
+              .form-label {
+                width: 100% !important;
+              }
+
+              .form-label-left,
+              .form-label-right {
+                display: block;
+                float: none;
+                text-align: left;
+                width: auto !important;
+              }
+
+              .form-line,
+              .form-line.form-line-column {
+                padding: 2% 5%;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+
+              input[type=text],
+              input[type=email],
+              input[type=tel],
+              textarea {
+                width: 100%;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                max-width: initial !important;
+              }
+
+              .form-dropdown,
+              .form-textarea,
+              .form-textbox {
+                width: 100% !important;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+
+              .form-input,
+              .form-input-wide,
+              .form-textarea,
+              .form-textbox,
+              .form-dropdown {
+                max-width: initial !important;
+              }
+
+              .form-address-city,
+              .form-address-line,
+              .form-address-postal,
+              .form-address-state,
+              .form-address-table,
+              .form-address-table .form-sub-label-container,
+              .form-address-table select,
+              .form-input {
+                width: 100%;
+              }
+
+              div.form-header-group {
+                padding: 24px 36px !important;
+                padding-left: 5% !important;
+                padding-right: 5% !important;
+                margin: 0 0px 2% !important;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+
+              div.form-header-group.hasImage img {
+                max-width: 100%;
+              }
+
+              [data-type="control_button"] {
+                margin-bottom: 0 !important;
+              }
+
+              [data-type=control_fullname] .form-sub-label-container {
+                width: 48%;
+              }
+
+              [data-type=control_fullname] .form-sub-label-container:first-child {
+                margin-right: 4%;
+              }
+
+              [data-type=control_phone] .form-sub-label-container {
+                width: 65%;
+              }
+
+              [data-type=control_phone] .form-sub-label-container:first-child {
+                width: 31%;
+                margin-right: 4%;
+              }
+
+              [data-type=control_datetime] .form-sub-label-container+.form-sub-label-container,
+              [data-type=control_datetime] .form-sub-label-container:first-child {
+                width: 27.3%;
+                margin-right: 6%;
+              }
+
+              [data-type=control_datetime] .form-sub-label-container+.form-sub-label-container+.form-sub-label-container {
+                width: 33.3%;
+                margin-right: 0;
+              }
+
+              [data-type=control_datetime] span+span+span>span:first-child {
+                display: block;
+                width: 100% !important;
+              }
+
+              [data-type=control_birthdate] .form-sub-label-container,
+              [data-type=control_datetime] span+span+span>span:first-child+span+span,
+              [data-type=control_time] .form-sub-label-container {
+                width: 27.3% !important;
+                margin-right: 6% !important;
+              }
+
+              [data-type=control_birthdate] .form-sub-label-container:last-child,
+              [data-type=control_time] .form-sub-label-container:last-child {
+                width: 33.3% !important;
+                margin-right: 0 !important;
+              }
+
+              .form-pagebreak-back-container,
+              .form-pagebreak-next-container {
+                width: 50% !important;
+              }
+
+              .form-pagebreak-back,
+              .form-pagebreak-next,
+              .form-product-item.hover-product-item {
+                width: 100%;
+              }
+
+              .form-pagebreak-back-container {
+                padding: 0;
+                text-align: right;
+              }
+
+              .form-pagebreak-next-container {
+                padding: 0;
+                text-align: left;
+              }
+
+              .form-pagebreak {
+                margin: 0 auto;
+              }
+
+              .form-buttons-wrapper {
+                margin: 0 !important;
+                margin-left: 0 !important;
+              }
+
+              .form-buttons-wrapper button {
+                width: 100%;
+              }
+
+              .form-buttons-wrapper .form-submit-print {
+                margin: 0 !important;
+              }
+
+              table {
+                width: 100% !important;
+                max-width: initial !important;
+              }
+
+              table td+td {
+                padding-left: 3%;
+              }
+
+              .form-checkbox-item,
+              .form-radio-item {
+                white-space: normal !important;
+              }
+
+              .form-checkbox-item input,
+              .form-radio-item input {
+                width: auto;
+              }
+
+              .form-collapse-table {
+                margin: 0 5%;
+                display: block;
+                zoom: 1;
+                width: auto;
+              }
+
+              .form-collapse-table:before,
+              .form-collapse-table:after {
+                display: table;
+                content: '';
+                line-height: 0;
+              }
+
+              .form-collapse-table:after {
+                clear: both;
+              }
+
+              .fb-like-box {
+                width: 98% !important;
+              }
+
+              .form-error-message {
+                clear: both;
+                bottom: -10px;
+              }
+
+              .date-separate,
+              .phone-separate {
+                display: none;
+              }
+
+              .custom-field-frame,
+              .direct-embed-widgets,
+              .signature-pad-wrapper {
+                width: 100% !important;
+              }
+            }
+
+            /* | */
+
+            /*__INSPECT_SEPERATOR__*/
+            .form-all {
+              -moz-box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+            }
+
+            [data-type="control_head"] {
+              padding-bottom: 20px;
+            }
+
+            /*responsive fields*/
+            [data-type="control_textbox"] .form-textbox,
+            [data-type="control_fullname"] .form-textbox,
+            [data-type="control_email"] .form-textbox,
+            [data-type="control_textarea"] .form-textarea,
+            [data-type="control_dropdown"] .form-dropdown {
+              width: 100% !important;
+              max-width: none !important;
+            }
+
+            .form-textbox,
+            .form-textarea,
+            .form-dropdown {
+              max-width: none !important;
+              box-shadow: none;
+              outline: none;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              font-family: inherit;
+              padding: 6px;
+            }
+
+            .form-textarea-limit>span {
+              display: block;
+            }
+
+            [data-type="control_dropdown"] .form-input,
+            [data-type="control_dropdown"] .form-input-wide {
+              width: 100%;
+            }
+
+            /*input focus*/
+            .form-line-active input:focus,
+            .form-line-active textarea:focus,
+            .form-line-active select:focus {
+              box-shadow: none;
+            }
+
+            /*reset error*/
+            .form-line-error {
+              box-shadow: none;
+            }
+
+            /*input error*/
+            .form-line-error input:not(#coupon-input),
+            .form-line-error textarea,
+            .form-line-error select,
+            .form-line-error .form-validation-error {
+              border: 1px solid #e15353 !important;
+              box-shadow: none !important;
+            }
+
+            .form-line-active {
+              color: inherit !important;
+            }
+
+            /*responsive content -wide or shrink*/
+            .form-label {
+              width: 35% !important;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+            }
+
+            .form-label-top {
+              width: 100% !important;
+            }
+
+            .form-line {
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              width: 100%;
+            }
+
+            .form-checkbox-other-input {
+              width: 80% !important;
+            }
+
+            .form-input {
+              width: 65% !important;
+              max-width: none !important;
+            }
+
+            .form-input-wide {
+              max-width: none !important;
+              display: inline-block;
+              width: 100%;
+            }
+
+            /*single fields with sublabels*/
+            [data-type="control_textbox"] .form-input-wide .form-sub-label-container,
+            [data-type="control_fullname"] .form-input-wide .form-sub-label-container,
+            [data-type="control_email"] .form-input-wide .form-sub-label-container,
+            [data-type="control_textarea"] .form-input-wide .form-sub-label-container,
+            [data-type="control_dropdown"] .form-input-wide .form-sub-label-container,
+            [data-type="control_textbox"] .form-input .form-sub-label-container,
+            [data-type="control_fullname"] .form-input .form-sub-label-container,
+            [data-type="control_email"] .form-input .form-sub-label-container,
+            [data-type="control_textarea"] .form-input .form-sub-label-container,
+            [data-type="control_dropdown"] .form-input .form-sub-label-container {
+              width: 100%;
+              max-width: none !important;
+            }
+
+            [data-type="control_dropdown"] .form-input-wide {
+              width: 100%;
+            }
+
+            /*responsive full name*/
+            [data-type="control_fullname"] .form-sub-label-container {
+              width: 50% !important;
+              margin: 0;
+              float: left;
+              box-sizing: border-box;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container {
+              display: inline-block;
+              padding-right: 5px;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container+.form-sub-label-container {
+              margin-right: 0;
+              padding-right: 0;
+              padding-left: 5px;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container+.form-sub-label-container {
+              margin-right: 0;
+              padding-right: 0;
+              padding-left: 5px;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container+.form-sub-label-container+.form-sub-label-container {
+              padding-left: 0;
+              padding-right: 5px;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container+.form-sub-label-container+.form-sub-label-container+.form-sub-label-container {
+              padding-left: 5px;
+              padding-right: 0;
+            }
+
+            [data-type="control_fullname"] .form-label+div .form-sub-label-container+.form-sub-label-container+.form-sub-label-container+.form-sub-label-container+.form-sub-label-container {
+              padding-right: 5px;
+              padding-left: 0;
+            }
+
+            #sublabel_prefix,
+            #sublabel_first,
+            #sublabel_middle {
+              /*margin-bottom : 10px;
+    */
+              ;
+            }
+
+            /*remove sepatators on date and phone*/
+            .phone-separate,
+            .date-separate {
+              display: none;
+            }
+
+            /*responsive phone fields*/
+            [data-type="control_phone"] input[name$="[area]"] {
+              width: 100%;
+            }
+
+            [data-type="control_phone"] input[name$="[phone]"] {
+              width: 100%;
+            }
+
+            [data-type="control_phone"] input[name$="[full]"] {
+              width: 100%;
+            }
+
+            [data-type="control_phone"] .form-sub-label-container {
+              width: 40%;
+              float: left;
+              box-sizing: border-box;
+              margin-right: 0;
+              padding-right: 12px;
+            }
+
+            /* responsive date time field */
+            [data-type="control_datetime"] .form-textbox,
+            [data-type="control_datetime"] .form-dropdown {
+              width: 100%;
+            }
+
+            [data-type="control_datetime"] .form-sub-label-container {
+              width: 28%;
+              padding-left: 4px;
+              box-sizing: border-box;
+              margin-right: 0;
+            }
+
+            [data-type="control_datetime"] .form-sub-label-container:first-child {
+              padding-left: 0;
+            }
+
+            [data-type="control_datetime"] .form-sub-label-container:first-child+.form-sub-label-container+.form-sub-label-container {
+              padding-right: 0;
+            }
+
+            [data-type="control_datetime"] .form-sub-label-container:last-child {
+              width: auto !important;
+            }
+
+            .allowTime-container .form-sub-label-container:last-child {
+              width: 20% !important;
+            }
+
+            span.allowTime-container {
+              width: 80%;
+              padding-top: 14px;
+            }
+
+            .allowTime-container span.form-sub-label-container {
+              width: 35%;
+            }
+
+            span.allowTime-container .form-dropdown {
+              width: 100%;
+            }
+
+            span.allowTime-container>span:first-child {
+              display: none;
+            }
+
+            span.allowTime-container>span:first-child+span {
+              padding-left: 0;
+            }
+
+            .showAutoCalendar+label {
+              display: none;
+            }
+
+            span.allowTime-container+span {
+              padding-top: 14px;
+            }
+
+            /*calendar lite mode*/
+            [data-type="control_datetime"] div[style*="none"]+.form-sub-label-container {
+              width: 84%;
+              padding-left: 0;
+            }
+
+            /*responsive phone field*/
+            [data-type="control_phone"] .form-sub-label-container+.form-sub-label-container {
+              width: 60%;
+              margin-right: 0;
+              padding-right: 0;
+              padding-left: 12px;
+            }
+
+            /*responsive full address fields*/
+            .form-address-city,
+            .form-address-line,
+            .form-address-postal,
+            .form-address-state,
+            .form-address-table,
+            .form-address-table .form-sub-label-container,
+            .form-address-table select {
+              width: 100%;
+              max-width: 100%;
+            }
+
+            [data-type="control_address"] input[name$="[city]"],
+            [data-type="control_address"] input[name$="[postal]"] {
+              width: 90% !important;
+            }
+
+            [data-type="control_address"] input[name$="[area]"] {
+              width: 60%;
+            }
+
+            /*reset submit button*/
+            [data-type="control_button"] {
+              background: transparent !important;
+            }
+
+            .form-submit-button,
+            .form-submit-reset,
+            .form-submit-print {
+              outline: none;
+            }
+
+            /*remove other checkbox*/
+            .form-checkbox-other,
+            .form-radio-other {
+              visibility: hidden !important;
+            }
+
+            /*shruken fields*/
+            .form-line-column {
+              width: 50%;
+            }
+
+            .form-line-column .form-label-top {
+              width: 100% !important;
+            }
+
+            /*fix form builder display*/
+            div#stage.form-all {
+              max-width: none !important;
+              margin-right: 0;
+            }
+
+            div#stage .form-input {
+              width: 64% !important;
+            }
+
+            /*remove first pagebreak back button*/
+            .form-all .page-section:first-child .form-pagebreak .form-pagebreak-back-container {
+              display: none !important;
+            }
+
+            /* responsive pagebreak */
+            .form-pagebreak-back-container {
+              width: 50% !important;
+              text-align: left;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              float: left;
+            }
+
+            .form-pagebreak-next-container {
+              width: 50% !important;
+              text-align: right;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              float: left;
+            }
+
+            /* radio-checkbox button make border 1px */
+            .form-radio-item:not(#foo) label:after,
+            .form-radio-item:not(#foo) label:before {
+              border-radius: 50%;
+            }
+
+            .form-checkbox-item:not(#foo) label:after,
+            .form-checkbox-item:not(#foo) label:before {
+              border-radius: 0;
+            }
+
+            .form-radio-item:not(#foo) label:before,
+            .form-checkbox-item:not(#foo) label:before {
+              border-width: 1px;
+            }
+
+            /*responsive credit card on payment fields*/
+            table td+td {
+              padding-left: 0;
+            }
+
+            .form-address-table {
+              width: 100%;
+            }
+
+            [data-type="control_stripe"] .form-address-table,
+            [data-type="control_stripe"] .form-address-table .form-textbox,
+            [data-type="control_authnet"] .form-address-table,
+            [data-type="control_authnet"] .form-address-table .form-textbox,
+            #creditCardTable.form-address-table,
+            #creditCardTable.form-address-table .form-textbox {
+              max-width: none;
+            }
+
+            [data-type="control_stripe"] .form-address-table td:last-child .form-sub-label-container,
+            [data-type="control_authnet"] .form-address-table td:last-child .form-sub-label-container,
+            #creditCardTable.form-address-table td:last-child .form-sub-label-container {
+              margin-left: 0;
+              white-space: normal;
+            }
+
+            [data-type="control_stripe"] .form-address-table td .form-sub-label-container,
+            [data-type="control_authnet"] .form-address-table td .form-sub-label-container,
+            #creditCardTable.form-address-table td .form-sub-label-container {
+              width: 100%;
+            }
+
+            [data-type="control_stripe"] .form-address-table .form-textbox,
+            [data-type="control_stripe"] .form-address-table .form-dropdown,
+            [data-type="control_authnet"] .form-address-table .form-textbox,
+            [data-type="control_authnet"] .form-address-table .form-dropdown,
+            #creditCardTable.form-address-table .form-textbox,
+            #creditCardTable.form-address-table .form-dropdown {
+              width: 100%;
+              visibility: visible;
+            }
+
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr td:first-child span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr td:first-child span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr td:first-child span {
+              margin: 0;
+              padding-right: 6px;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+            }
+
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr td:first-child+td span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr td:first-child+td span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr td:first-child+td span {
+              margin: 0;
+              padding-left: 6px;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+            }
+
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr+tr td:first-child span,
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr+tr td:first-child span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr+tr td:first-child span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span {
+              margin: 0;
+              padding-right: 6px;
+              width: 50% !important;
+              visibility: hidden;
+              float: left;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+            }
+
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr+tr td:first-child span+span,
+            [data-type="control_stripe"] .form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span+span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr+tr td:first-child span+span,
+            [data-type="control_authnet"] .form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span+span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr+tr td:first-child span+span,
+            #creditCardTable.form-address-table tbody>tr:first-child+tr+tr+tr td:first-child span+span {
+              margin: 0;
+              padding-top: 0 !important;
+              padding-right: 0;
+              padding-left: 6px;
+              width: 50% !important;
+              box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+            }
+
+            .cc_ccv {
+              width: 100% !important;
+            }
+
+            [data-type="control_stripe"] .form-address-table .form-sub-label,
+            [data-type="control_authnet"] .form-address-table .form-sub-label,
+            #creditCardTable.form-address-table .form-sub-label {
+              visibility: visible;
+            }
+
+            /*cc fix city state, country */
+            [data-type="control_stripe"] .form-address-table td[width="50%"]>span:first-child,
+            [data-type="control_authnet"] .form-address-table td[width="50%"]>span:first-child,
+            #creditCardTable.form-address-table td[width="50%"]>span:first-child {
+              box-sizing: border-box;
+              padding-right: 7px;
+            }
+
+            [data-type="control_stripe"] .form-address-table td[width="50%"]+td>span:first-child,
+            [data-type="control_authnet"] .form-address-table td[width="50%"]+td>span:first-child,
+            #creditCardTable.form-address-table td[width="50%"]+td>span:first-child {
+              box-sizing: border-box;
+              padding-left: 7px;
+            }
+
+            [data-type="control_stripe"] .form-address-table td[width="50%"]+td[width="50%"]>span:first-child,
+            [data-type="control_authnet"] .form-address-table td[width="50%"]+td[width="50%"]>span:first-child,
+            #creditCardTable.form-address-table td[width="50%"]+td[width="50%"]>span:first-child {
+              box-sizing: border-box;
+              padding-right: 0;
+            }
+
+            .hover-product-item:hover {
+              color: inherit;
+            }
+
+            /*fix for braintree cc styling*/
+            [data-type="control_braintree"] .form-sub-label-container {
+              width: 100% !important;
+              padding: 4px;
+              box-sizing: border-box;
+            }
+
+            [data-type="control_braintree"] .form-textbox {
+              width: 100%;
+            }
+
+            .braintree-hosted-fields {
+              width: 100% !important;
+              box-sizing: border-box;
+              min-height: 28px;
+            }
+
+            /*remove bottom spacing on CC section*/
+            #creditCardTable.form-address-table tbody tr+tr+tr td,
+            [data-type="control_stripe"] .form-address-table tbody tr+tr+tr td,
+            [data-type="control_authnet"] .form-address-table tbody tr+tr+tr td {
+              padding-bottom: 0;
+            }
+
+            @media screen and (max-device-width:768px) {
+              .form-all {
+                margin: 0 auto !important;
+                width: 100% !important;
+              }
+
+              [data-type=control_fullname] .form-sub-label-container:first-child {
+                margin-right: 0;
+              }
+
+            }
+
+            @media screen and (max-device-width:480px) {
+              .jotform-form {
+                padding: 0;
+              }
+
+              .form-input {
+                width: 100% !important;
+              }
+
+              .form-label {
+                width: 100% !important;
+                float: none !important;
+              }
+
+              .form-line-column {
+                width: 100% !important;
+              }
+
+              div.form-header-group {
+                margin: 0 !important;
+                padding: 24px 20px !important;
+              }
+
+              [data-type="control_datetime"] .form-sub-label-container {
+                float: left;
+              }
+
+              [data-type=control_fullname] .form-sub-label-container:first-child {
+                margin-right: 0;
+              }
+
+            }
+
+
+            /* Injected CSS Code */
+          </style>
+
+          <form class="jotform-form" action="https://submit.jotform.com/submit/202081827233449/" method="post"
+            name="form_202081827233449" id="202081827233449" accept-charset="utf-8" autocomplete="on">
+            <input type="hidden" name="formID" value="202081827233449" />
+            <input type="hidden" id="JWTContainer" value="" />
+            <input type="hidden" id="cardinalOrderNumber" value="" />
+            <div role="main" class="form-all">
+              <ul class="form-section page-section">
+                <li id="cid_9" class="form-input-wide" data-type="control_head">
+                  <div class="form-header-group  header-large">
+                    <div class="header-text httal htvam">
+                      <h1 id="header_9" class="form-header" data-component="header">
+                        Contact Us
+                      </h1>
+
+                    </div>
+                  </div>
+                </li>
+                <li class="form-line jf-required" data-type="control_textbox" id="id_8">
+                  <label class="form-label form-label-top form-label-auto" id="label_8" for="input_8">
+                    Full Name
+                    <span class="form-required">
+                      *
+                    </span>
+                  </label>
+                  <div id="cid_8" class="form-input-wide jf-required">
+                    <input type="text" id="input_8" name="q8_fullName" data-type="input-textbox"
+                      class="form-textbox validate[required]" size="25" value="" placeholder=" "
+                      data-component="textbox" aria-labelledby="label_8" required="" />
+                  </div>
+                </li>
+                <li class="form-line jf-required" data-type="control_email" id="id_7">
+                  <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7">
+                    E-mail
+                    <span class="form-required">
+                      *
+                    </span>
+                  </label>
+                  <div id="cid_7" class="form-input-wide jf-required">
+                    <input type="email" id="input_7" name="q7_email" class="form-textbox validate[required, Email]"
+                      size="25" value="" placeholder="enter one of the IDs mentioned above" data-component="email"
+                      aria-labelledby="label_7" required="" />
+                  </div>
+                </li>
+                <li class="form-line jf-required" data-type="control_textarea" id="id_4">
+                  <label class="form-label form-label-top form-label-auto" id="label_4" for="input_4">
+                    Message
+                    <span class="form-required">
+                      *
+                    </span>
+                  </label>
+                  <div id="cid_4" class="form-input-wide jf-required">
+                    <textarea id="input_4" class="form-textarea validate[required]" name="q4_message4" cols="28"
+                      rows="6" data-component="textarea" required="" aria-labelledby="label_4"></textarea>
+                  </div>
+                </li>
+                <li class="form-line" data-type="control_button" id="id_2">
+                  <div id="cid_2" class="form-input-wide">
+                    <div style="text-align:center" data-align="center"
+                      class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField">
+                      <button id="input_2" type="submit"
+                        class="form-submit-button form-submit-button-none submit-button jf-form-buttons jsTest-submitField"
+                        data-component="button" data-content="">
+                        SUBMIT
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li style="display:none">
+                  Should be Empty:
+                  <input type="text" name="website" value="" />
+                </li>
+              </ul>
+            </div>
+            <script>
+              JotForm.showJotFormPowered = "new_footer";
+            </script>
+            <script>
+              JotForm.poweredByText = "Powered by JotForm";
+            </script>
+            <input type="hidden" id="simple_spc" name="simple_spc" value="202081827233449" />
+            <script type="text/javascript">
+              document.getElementById("si" + "mple" + "_spc").value = "202081827233449-202081827233449";
+            </script>
+            <div class="formFooter-heightMask">
+            </div>
+        </div>
+        </form>
+    </div>
+
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+
+</html>
